@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@/components/SideBar";
-import Navbar from "@/components/Navbar";
+//import Navbar from "@/components/Navbar";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -42,7 +42,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <Sidebar role="ADMIN" /> {/* TEMP: default role */}
       
       <div className="flex flex-1 flex-col">
-        <Navbar user={null} onLogout={handleLogout} /> {/* user is null safely */}
+       {/*<Navbar user={null} onLogout={handleLogout} />*/}  {/* user is null safely */}
         <main className="flex-1 overflow-y-auto p-8">{children}</main>
       </div>
     </div>

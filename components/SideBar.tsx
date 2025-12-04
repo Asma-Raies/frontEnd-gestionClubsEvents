@@ -11,8 +11,11 @@ export default function Sidebar({ role }: { role?: string }) {
   const links = [
     { href: "/dashboard", label: "Tableau de bord" },
     { href: "/dashboard/clubs", label: "Clubs" },
-    { href: "/dashboard/profile", label: "Mon profil" },
+    { href: "/dashboard/evenements", label: "Evenement" },
+    
+
     ...(isAdmin ? [{ href: "/dashboard/users", label: "Utilisateurs" }] : []),
+    { href: "/login", label: "Deconnexion" },
   ];
 
   return (
