@@ -23,12 +23,21 @@ export const isAdmin = () => {
   if (!token) return false;
   try {
     const decoded: DecodedToken = jwtDecode(token);
-    return decoded.roles.includes('ROLE_ADMIN');
+    return decoded.roles.includes('ADMIN');
   } catch {
     return false;
   }
 };
-
+export const isModerator = () => {
+  const token = localStorage.getItem('token');
+  if (!token) return false;
+  try {
+    const decoded: DecodedToken = jwtDecode(token);
+    return decoded.roles.includes('MODERATEUR');
+  } catch {
+    return false;
+  }
+};
 export const logout = () => {
   localStorage.removeItem('token');
   window.location.href = '/login';

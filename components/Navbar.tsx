@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 
 export default function Navbar({ user, onLogout }: { user: any; onLogout: () => void }) {
   // Safe fallback values if user is null
@@ -20,3 +20,4 @@ export default function Navbar({ user, onLogout }: { user: any; onLogout: () => 
     </header>
   );
 }
+*/

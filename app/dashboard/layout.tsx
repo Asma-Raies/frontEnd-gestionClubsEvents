@@ -1,50 +1,19 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+// app/dashboard/layout.tsx
 import Sidebar from "@/components/SideBar";
-import Navbar from "@/components/Navbar";
+import { redirect } from "next/navigation";
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
-  const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    // Redirect ONLY if no token
-    if (!token) {
-      router.push("/login");
-      return;
-    }
-
-    // Dashboard is ready
-    setIsReady(true);
-  }, [router]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    router.push("/login");
-  };
-
-  if (!isReady) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        Chargement...
-      </div>
-    );
-  }
+export default async function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      {/* No user info yet — backend does not return user */}
-      <Sidebar role="ADMIN" /> {/* TEMP: default role */}
-      
-      <div className="flex flex-1 flex-col">
-        <Navbar user={null} onLogout={handleLogout} /> {/* user is null safely */}
-        <main className="flex-1 overflow-y-auto p-8">{children}</main>
-      </div>
+    <div className="flex min-h-screen bg-gray-50">
+      <Sidebar role="ADMIN" />
+      <main className="flex-1 ml-8 p-8">
+        {children}
+      </main>
     </div>
   );
 }

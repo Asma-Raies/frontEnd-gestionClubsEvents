@@ -38,6 +38,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UserPlus, Trash2, Edit, School } from "lucide-react";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 
 interface User {
   id: number;
@@ -96,16 +97,14 @@ export default function UsersPage() {
     alert("Club assigné avec succès !");
   };
 
+  const getRoleCount = (role: string) => users.filter(u => u.role === role).length;
+
   const getRoleBadgeVariant = (role: string) => {
     switch (role) {
-      case "ADMIN":
-        return "destructive";
-      case "MODERATEUR":
-        return "default";
-      case "ETUDIANT":
-        return "secondary";
-      default:
-        return "outline";
+      case "ADMIN": return "destructive";
+      case "MODERATEUR": return "default";
+      case "ETUDIANT": return "secondary";
+      default: return "outline";
     }
   };
 
@@ -133,7 +132,26 @@ export default function UsersPage() {
             Ajouter un utilisateur
           </Button>
         </div>
-
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <Card className="border">
+          <CardContent className="text-center">
+            <CardTitle className="text-lg font-bold">Total Users</CardTitle>
+            <p className="text-3xl font-extrabold">{users.length}</p>
+          </CardContent>
+        </Card>
+        <Card className="border">
+          <CardContent className="text-center">
+            <CardTitle className="text-lg font-bold">Étudiants</CardTitle>
+            <p className="text-3xl font-extrabold">{getRoleCount("ETUDIANT")}</p>
+          </CardContent>
+        </Card>
+        <Card className="border">
+          <CardContent className="text-center">
+            <CardTitle className="text-lg font-bold">Modérateurs</CardTitle>
+            <p className="text-3xl font-extrabold">{getRoleCount("MODERATEUR")}</p>
+          </CardContent>
+        </Card>
+      </div>
         {users.length === 0 ? (
           <div className="text-center py-12 text-gray-500">
             <p className="text-lg">Aucun utilisateur trouvé</p>
